@@ -52,7 +52,7 @@ type CustomEncoderAttachmentTestStruct struct {
 	Value int32 `json:"value"`
 }
 
-type CustomEncoderAttachmentTestStructEncoder struct {}
+type CustomEncoderAttachmentTestStructEncoder struct{}
 
 func (c *CustomEncoderAttachmentTestStructEncoder) Encode(ptr unsafe.Pointer, stream *jsoniter.Stream) {
 	attachVal, ok := stream.Attachment.(int)

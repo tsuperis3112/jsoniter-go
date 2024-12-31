@@ -238,6 +238,14 @@ func (stream *Stream) WriteStringWithHTMLEscaped(s string) {
 	writeStringSlowPathWithHTMLEscaped(stream, i, s, valLen)
 }
 
+var specialCharactersEncodingMap = map[byte]byte{
+	'\\': '\\',
+	'"':  '"',
+	'\n': 'n',
+	'\r': 'r',
+	'\t': 't',
+}
+
 func writeStringSlowPathWithHTMLEscaped(stream *Stream, i int, s string, valLen int) {
 	start := i
 	// for the remaining parts, we process them char by char
@@ -250,16 +258,9 @@ func writeStringSlowPathWithHTMLEscaped(stream *Stream, i int, s string, valLen 
 			if start < i {
 				stream.WriteRaw(s[start:i])
 			}
-			switch b {
-			case '\\', '"':
-				stream.writeTwoBytes('\\', b)
-			case '\n':
-				stream.writeTwoBytes('\\', 'n')
-			case '\r':
-				stream.writeTwoBytes('\\', 'r')
-			case '\t':
-				stream.writeTwoBytes('\\', 't')
-			default:
+			if special, ok := specialCharactersEncodingMap[b]; ok {
+				stream.writeTwoBytes('\\', special)
+			} else {
 				// This encodes bytes < 0x20 except for \t, \n and \r.
 				// If escapeHTML is set, it also escapes <, >, and &
 				// because they can lead to security holes when
@@ -340,16 +341,9 @@ func writeStringSlowPath(stream *Stream, i int, s string, valLen int) {
 			if start < i {
 				stream.WriteRaw(s[start:i])
 			}
-			switch b {
-			case '\\', '"':
-				stream.writeTwoBytes('\\', b)
-			case '\n':
-				stream.writeTwoBytes('\\', 'n')
-			case '\r':
-				stream.writeTwoBytes('\\', 'r')
-			case '\t':
-				stream.writeTwoBytes('\\', 't')
-			default:
+			if special, ok := specialCharactersEncodingMap[b]; ok {
+				stream.writeTwoBytes('\\', special)
+			} else {
 				// This encodes bytes < 0x20 except for \t, \n and \r.
 				// If escapeHTML is set, it also escapes <, >, and &
 				// because they can lead to security holes when
