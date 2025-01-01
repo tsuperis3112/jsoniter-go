@@ -2,10 +2,11 @@ package test
 
 import (
 	"encoding/json"
-	"github.com/json-iterator/go"
 	"io/ioutil"
 	"os"
 	"testing"
+
+	"github.com/tsuperis3112/jsoniter-go"
 )
 
 //func Test_large_file(t *testing.T) {

@@ -3,8 +3,8 @@ package any_tests
 import (
 	"testing"
 
-	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/tsuperis3112/jsoniter-go"
 )
 
 func Test_read_empty_array_as_any(t *testing.T) {

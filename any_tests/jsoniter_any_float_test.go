@@ -3,8 +3,8 @@ package any_tests
 import (
 	"testing"
 
-	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/tsuperis3112/jsoniter-go"
 )
 
 var floatConvertMap = map[string]float64{

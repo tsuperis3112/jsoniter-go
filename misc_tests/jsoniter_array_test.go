@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/tsuperis3112/jsoniter-go"
 )
 
 func Test_empty_array(t *testing.T) {

@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"testing"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	jsoniter "github.com/tsuperis3112/jsoniter-go"
 )
 
 func Test_read_float(t *testing.T) {

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/modern-go/reflect2"
 	"github.com/stretchr/testify/require"
+	jsoniter "github.com/tsuperis3112/jsoniter-go"
 )
 
 type unmarshalCase struct {

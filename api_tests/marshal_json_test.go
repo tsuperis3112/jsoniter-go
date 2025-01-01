@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	jsoniter "github.com/tsuperis3112/jsoniter-go"
 )
 
 type Foo struct {
