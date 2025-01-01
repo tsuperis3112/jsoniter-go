@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"math/rand"
 	"strconv"
 	"testing"
@@ -165,7 +164,7 @@ func jsonFloatIntArray(t *testing.T, numberOfItems int) []byte {
 }
 
 func Benchmark_jsoniter_encode_int(b *testing.B) {
-	stream := jsoniter.NewStream(jsoniter.ConfigDefault, ioutil.Discard, 64)
+	stream := jsoniter.NewStream(jsoniter.ConfigDefault, io.Discard, 64)
 	for n := 0; n < b.N; n++ {
 		stream.Reset(nil)
 		stream.WriteUint64(0xffffffff)

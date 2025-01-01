@@ -2,7 +2,7 @@ package test
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"os"
 	"testing"
 
@@ -26,7 +26,7 @@ import (
 //}
 
 func init() {
-	ioutil.WriteFile("/tmp/large-file.json", []byte(`[{
+	os.WriteFile("/tmp/large-file.json", []byte(`[{
   "person": {
     "id": "d50887ca-a6ce-4e59-b89f-14f0b5d03b03",
     "name": {
@@ -148,7 +148,7 @@ func Benchmark_json_large_file(b *testing.B) {
 	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
 		file, _ := os.Open("/tmp/large-file.json")
-		bytes, _ := ioutil.ReadAll(file)
+		bytes, _ := io.ReadAll(file)
 		file.Close()
 		result := []struct{}{}
 		err := json.Unmarshal(bytes, &result)
