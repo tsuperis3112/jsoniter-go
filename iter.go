@@ -153,19 +153,6 @@ func (iter *Iterator) WhatIsNext() ValueType {
 	return valueType
 }
 
-func (iter *Iterator) skipWhitespacesWithoutLoadMore() bool {
-	for i := iter.head; i < iter.tail; i++ {
-		c := iter.buf[i]
-		switch c {
-		case ' ', '\n', '\t', '\r':
-			continue
-		}
-		iter.head = i
-		return false
-	}
-	return true
-}
-
 func (iter *Iterator) isObjectEnd() bool {
 	c := iter.nextToken()
 	if c == ',' {
@@ -221,8 +208,10 @@ func (iter *Iterator) ReportError(operation string, msg string) {
 		contextEnd = iter.tail
 	}
 	context := string(iter.buf[contextStart:contextEnd])
-	iter.Error = fmt.Errorf("%s: %s, error found in #%v byte of ...|%s|..., bigger context ...|%s|...",
-		operation, msg, iter.head-peekStart, parsing, context)
+	iter.Error = fmt.Errorf(
+		"%s: %s, error found in #%v byte of ...|%s|..., bigger context ...|%s|",
+		operation, msg, iter.head-peekStart, parsing, context,
+	)
 }
 
 // CurrentBuffer gets current buffer as string for debugging purpose
@@ -284,7 +273,6 @@ func (iter *Iterator) unreadByte() {
 		return
 	}
 	iter.head--
-	return
 }
 
 // Read read the next JSON element as generic interface{}.

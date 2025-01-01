@@ -25,8 +25,26 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Install dependencies
-      run: go get -v ./...
+      run: go mod download
 
+    - name: Run tests
+      run: go test -v ./...
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: ./go.mod
+    
     - name: Check go fmt
       run: |
         res=$(gofmt -s -l .)
@@ -36,5 +54,7 @@ jobs:
           exit 1
         fi
 
-    - name: Run tests
-      run: go test -v ./...
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: v1.62

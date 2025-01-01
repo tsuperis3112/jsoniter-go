@@ -104,7 +104,7 @@ type Date2 struct {
 	time.Time
 }
 
-func (d Date2) UnmarshalJSON(b []byte) error {
+func (d *Date2) UnmarshalJSON(b []byte) error {
 	dateStr := string(b) // something like `"2017-08-20"`
 
 	if dateStr == "null" {

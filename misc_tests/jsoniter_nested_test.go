@@ -18,8 +18,6 @@ type Level2 struct {
 }
 
 func Test_deep_nested(t *testing.T) {
-	type unstructured interface{}
-
 	testcases := []struct {
 		name        string
 		data        []byte

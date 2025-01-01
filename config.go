@@ -271,18 +271,6 @@ func (cfg *frozenConfig) escapeHTML(encoderExtension EncoderExtension) {
 	encoderExtension[reflect2.TypeOfPtr((*string)(nil)).Elem()] = &htmlEscapedStringEncoder{}
 }
 
-func (cfg *frozenConfig) cleanDecoders() {
-	typeDecoders = map[string]ValDecoder{}
-	fieldDecoders = map[string]ValDecoder{}
-	*cfg = *(cfg.configBeforeFrozen.Froze().(*frozenConfig))
-}
-
-func (cfg *frozenConfig) cleanEncoders() {
-	typeEncoders = map[string]ValEncoder{}
-	fieldEncoders = map[string]ValEncoder{}
-	*cfg = *(cfg.configBeforeFrozen.Froze().(*frozenConfig))
-}
-
 func (cfg *frozenConfig) MarshalToString(v interface{}) (string, error) {
 	stream := cfg.BorrowStream(nil)
 	defer cfg.ReturnStream(stream)

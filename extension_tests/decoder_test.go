@@ -83,7 +83,7 @@ func Test_custom_encoder_attachment(t *testing.T) {
 
 func Test_customize_field_decoder(t *testing.T) {
 	type Tom struct {
-		field1 string
+		field1 string //nolint:unused
 	}
 	jsoniter.RegisterFieldDecoderFunc("jsoniter.Tom", "field1", func(ptr unsafe.Pointer, iter *jsoniter.Iterator) {
 		*((*string)(ptr)) = strconv.Itoa(iter.ReadInt())
