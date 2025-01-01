@@ -3,7 +3,7 @@
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/tsuperis3112/jsoniter-go)
 [![CI](https://github.com/tsuperis3112/jsoniter-go/actions/workflows/ci.yaml/badge.svg)](https://github.com/tsuperis3112/jsoniter-go/actions/workflows/ci.yaml)
 
-**This repository is a fork of [json-iterator/go](https://github.com/tsuperis3112/jsoniter-go) because the original repository has not been maintained since 2021.**
+**This repository is a fork of [json-iterator/go](https://github.com/json-iterator/go) because the original repository has not been maintained since 2021.**
 
 A high-performance almost compatible drop-in replacement of "encoding/json"
 
@@ -42,8 +42,6 @@ import jsoniter "github.com/tsuperis3112/jsoniter-go"
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 json.Unmarshal(input, &data)
 ```
-
-[More documentation](http://jsoniter.com/migrate-from-go-std.html)
 
 ## How to get
 
